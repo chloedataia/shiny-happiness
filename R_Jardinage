@@ -1,1 +1,16 @@
 TEST 
+
+
+#Créons une variable pour identifier les clients ayant plus acheté en 2017 qu'en 2016
+ 
+cli_dev<-jardinerie%>%select(jardinerie$IDCLIENT,jardinerie$CA_2017, jardinerie$CA_2016)
+
+cli_dev<-jardinerie%>%mutate(dev= case_when( CA_2017>CA_2016 ~ "dev+", TRUE ~ "dev-"))
+
+#Comptons le potentiel de clients 
+sum(cli_dev$dev=="dev+")
+#27 225
+#Comptons le nombre de client à développer
+sum(cli_dev$dev=="dev-")
+#2775
+
